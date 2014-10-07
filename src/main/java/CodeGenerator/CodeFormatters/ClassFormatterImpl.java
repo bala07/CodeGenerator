@@ -9,6 +9,7 @@ import CodeGenerator.CodeFormatters.Interfaces.MethodFormatter;
 import CodeGenerator.CodeGraph.Class;
 import CodeGenerator.CodeGraph.Field;
 import CodeGenerator.CodeGraph.Method;
+import com.google.inject.Inject;
 
 import static CodeGenerator.CodeFormatters.SpecialCharacters.*;
 
@@ -17,10 +18,11 @@ public class ClassFormatterImpl implements ClassFormatter
     private FieldFormatter fieldFormatter;
     private MethodFormatter methodFormatter;
 
-    public ClassFormatterImpl()
+    @Inject
+    public ClassFormatterImpl(FieldFormatter fieldFormatter, MethodFormatter methodFormatter)
     {
-        fieldFormatter = new FieldFormatterImpl();
-        methodFormatter = new MethodFormatterImpl();
+        this.fieldFormatter = fieldFormatter;
+        this.methodFormatter = methodFormatter;
     }
 
     @Override

@@ -1,25 +1,38 @@
 package CodeGenerator.CodeFormatters;
 
 import CodeGenerator.CodeFormatters.Interfaces.ClassFormatter;
+import CodeGenerator.CodeFormatters.Interfaces.FieldFormatter;
+import CodeGenerator.CodeFormatters.Interfaces.MethodFormatter;
 import CodeGenerator.CodeGraph.*;
 import CodeGenerator.CodeGraph.Class;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.initMocks;
 
 public class ClassFormatterImplTest
 {
     private ClassFormatter classFormatter;
+    @Mock
+    private MethodFormatter methodFormatterMock;
+    @Mock
+    private FieldFormatter fieldFormatterMock;
 
     @Before
     public void setup()
     {
-        classFormatter = new ClassFormatterImpl();
+        initMocks(this);
+        classFormatter = new ClassFormatterImpl(fieldFormatterMock, methodFormatterMock);
     }
 
     @Test
@@ -39,19 +52,18 @@ public class ClassFormatterImplTest
         methods.add(method2);
 
         Class classObject = new Class(VisibilityQualifier.PRIVATE, "class1", fields, methods);
+
+        List<String> formattedField= new ArrayList<>();
+        formattedField.add("foo");
+
+        when(fieldFormatterMock.format(any(Field.class))).thenReturn(formattedField);
+
         List<String> formatttedClass = classFormatter.format(classObject);
 
-        assertThat(formatttedClass.size(), is(10));
         assertThat(formatttedClass.get(0), is("private class class1 {"));
-        assertThat(formatttedClass.get(1), is("\tprivate int field1;"));
-        assertThat(formatttedClass.get(2), is("\tprivate String field2;"));
-        assertThat(formatttedClass.get(3), is("\tpublic void method1() {"));
-        assertThat(formatttedClass.get(4), is("\t\tSystem.out.println(\"Hello World\")"));
-        assertThat(formatttedClass.get(5), is("\t}"));
-        assertThat(formatttedClass.get(6), is("\tpublic void method2() {"));
-        assertThat(formatttedClass.get(7), is("\t\tSystem.out.println(\"Hello World\")"));
-        assertThat(formatttedClass.get(8), is("\t}"));
-        assertThat(formatttedClass.get(9), is("}"));
+        assertThat(formatttedClass.get(3), is("}"));
+        verify(fieldFormatterMock, times(2)).format(any(Field.class));
+        verify(methodFormatterMock, times(2)).format(any(Method.class));
     }
 
 }
