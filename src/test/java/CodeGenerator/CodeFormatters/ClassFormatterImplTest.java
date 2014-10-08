@@ -1,5 +1,7 @@
 package CodeGenerator.CodeFormatters;
 
+import CodeGenerator.Builders.FieldBuilder;
+import CodeGenerator.Builders.MethodBuilder;
 import CodeGenerator.CodeFormatters.Interfaces.ClassFormatter;
 import CodeGenerator.CodeFormatters.Interfaces.FieldFormatter;
 import CodeGenerator.CodeFormatters.Interfaces.MethodFormatter;
@@ -39,17 +41,12 @@ public class ClassFormatterImplTest
     public void shouldFormatClass()
     {
         List<Field> fields = new ArrayList<>();
-        fields.add(new Field(VisibilityQualifier.PRIVATE, "int", "field1"));
-        fields.add(new Field(VisibilityQualifier.PRIVATE, "String", "field2"));
-
-        Method method1 = new Method(VisibilityQualifier.PUBLIC, "void", "method1", new ArrayList<String>());
-        method1.addStatement("System.out.println(\"Hello World\")");
-        Method method2 = new Method(VisibilityQualifier.PUBLIC, "void", "method2", new ArrayList<String>());
-        method2.addStatement("System.out.println(\"Hello World\")");
+        fields.add(new FieldBuilder().withDefaults().build());
+        fields.add(new FieldBuilder().withDefaults().build());
 
         List<Method> methods = new ArrayList<>();
-        methods.add(method1);
-        methods.add(method2);
+        methods.add(new MethodBuilder().withDefaults().build());
+        methods.add(new MethodBuilder().withDefaults().build());
 
         Class classObject = new Class(VisibilityQualifier.PRIVATE, "class1", fields, methods);
 
@@ -61,9 +58,9 @@ public class ClassFormatterImplTest
         List<String> formatttedClass = classFormatter.format(classObject);
 
         assertThat(formatttedClass.get(0), is("private class class1 {"));
-        assertThat(formatttedClass.get(3), is("}"));
-        verify(fieldFormatterMock, times(2)).format(any(Field.class));
-        verify(methodFormatterMock, times(2)).format(any(Method.class));
+        assertThat(formatttedClass.get(formatttedClass.size()-1), is("}"));
+        verify(fieldFormatterMock, times(fields.size())).format(any(Field.class));
+        verify(methodFormatterMock, times(methods.size())).format(any(Method.class));
     }
 
 }
