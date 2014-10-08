@@ -1,12 +1,12 @@
 package CodeGenerator.CodeGraph;
 
-public class Field implements CodeMember
+public class FieldMember implements CodeMember
 {
     private VisibilityQualifier visibilityQualifier;
     private String type;
     private String name;
 
-    public Field(VisibilityQualifier visibilityQualifier, String type, String name)
+    public FieldMember(VisibilityQualifier visibilityQualifier, String type, String name)
     {
         this.visibilityQualifier = visibilityQualifier;
         this.type = type;

@@ -1,6 +1,6 @@
 package CodeGenerator.Builders;
 
-import CodeGenerator.CodeGraph.Field;
+import CodeGenerator.CodeGraph.FieldMember;
 import CodeGenerator.CodeGraph.VisibilityQualifier;
 
 public class FieldBuilder {
@@ -35,7 +35,7 @@ public class FieldBuilder {
         return this;
     }
 
-    public Field build() {
-        return new Field(visibilityQualifier, type, name);
+    public FieldMember build() {
+        return new FieldMember(visibilityQualifier, type, name);
     }
 }

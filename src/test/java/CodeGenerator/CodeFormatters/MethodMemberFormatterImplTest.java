@@ -1,7 +1,7 @@
 package CodeGenerator.CodeFormatters;
 
 import CodeGenerator.CodeFormatters.Interfaces.MethodFormatter;
-import CodeGenerator.CodeGraph.Method;
+import CodeGenerator.CodeGraph.MethodMember;
 import CodeGenerator.CodeGraph.VisibilityQualifier;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 
 @RunWith(Theories.class)
-public class MethodFormatterImplTest
+public class MethodMemberFormatterImplTest
 {
     private MethodFormatter methodFormatter;
 
@@ -29,11 +29,11 @@ public class MethodFormatterImplTest
     @Test
     public void shouldFormatMethod()
     {
-        Method method = new Method(VisibilityQualifier.PRIVATE, "void", "testMethod", new ArrayList<>());
-        method.addStatement("System.out.println(\"Hello World\")");
+        MethodMember methodMember = new MethodMember(VisibilityQualifier.PRIVATE, "void", "testMethod", new ArrayList<>());
+        methodMember.addStatement("System.out.println(\"Hello World\")");
 
 
-        List<String> formattedMethod = methodFormatter.format(method);
+        List<String> formattedMethod = methodFormatter.format(methodMember);
 
         assertThat(formattedMethod.size(), is(3));
         assertThat(formattedMethod.get(0), is("private void testMethod() {"));

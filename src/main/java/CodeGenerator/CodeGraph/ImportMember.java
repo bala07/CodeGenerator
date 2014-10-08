@@ -1,10 +1,10 @@
 package CodeGenerator.CodeGraph;
 
-public class Import implements CodeMember
+public class ImportMember implements CodeMember
 {
     private String name;
 
-    public Import(String name)
+    public ImportMember(String name)
     {
         this.name = name;
     }

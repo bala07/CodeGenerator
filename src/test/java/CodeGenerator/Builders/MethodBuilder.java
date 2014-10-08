@@ -1,6 +1,6 @@
 package CodeGenerator.Builders;
 
-import CodeGenerator.CodeGraph.Method;
+import CodeGenerator.CodeGraph.MethodMember;
 import CodeGenerator.CodeGraph.VisibilityQualifier;
 
 import java.util.ArrayList;
@@ -46,8 +46,8 @@ public class MethodBuilder {
         return this;
     }
 
-    public Method build() {
-        return new Method(visibilityQualifier, returnType, name, statements);
+    public MethodMember build() {
+        return new MethodMember(visibilityQualifier, returnType, name, statements);
     }
 }
 

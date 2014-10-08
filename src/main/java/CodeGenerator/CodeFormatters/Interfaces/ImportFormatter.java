@@ -1,11 +1,10 @@
 package CodeGenerator.CodeFormatters.Interfaces;
 
-import CodeGenerator.CodeFormatters.Interfaces.CodeFormatter;
-import CodeGenerator.CodeGraph.Import;
+import CodeGenerator.CodeGraph.ImportMember;
 
 import java.util.List;
 
 public interface ImportFormatter extends CodeFormatter
 {
-    public List<String> format(Import importCodeObject);
+    public List<String> format(ImportMember importMemberCodeObject);
 }

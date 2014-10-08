@@ -1,7 +1,7 @@
 package CodeGenerator.CodeFormatters;
 
 import CodeGenerator.CodeFormatters.Interfaces.FieldFormatter;
-import CodeGenerator.CodeGraph.Field;
+import CodeGenerator.CodeGraph.FieldMember;
 import CodeGenerator.CodeGraph.VisibilityQualifier;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +11,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class FieldFormatterImplTest
+public class FieldMemberFormatterImplTest
 {
     private FieldFormatter fieldFormatter;
 
@@ -24,9 +24,9 @@ public class FieldFormatterImplTest
     @Test
     public void shouldFormatTheFieldCodeObject()
     {
-        Field field = new Field(VisibilityQualifier.PRIVATE, "int", "func1");
+        FieldMember fieldMember = new FieldMember(VisibilityQualifier.PRIVATE, "int", "func1");
 
-        List<String> formattedField = fieldFormatter.format(field);
+        List<String> formattedField = fieldFormatter.format(fieldMember);
 
         System.out.println("formattedField.get(0) = " + formattedField.get(0));
 

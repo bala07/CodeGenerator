@@ -2,14 +2,14 @@ package CodeGenerator.CodeGraph;
 
 import java.util.List;
 
-public class Method implements CodeMember
+public class MethodMember implements CodeMember
 {
     private VisibilityQualifier visibilityQualifier;
     private String returnType;
     private String name;
     private List<String> statements;
 
-    public Method(VisibilityQualifier visibilityQualifier, String returnType, String name, List<String> statements)
+    public MethodMember(VisibilityQualifier visibilityQualifier, String returnType, String name, List<String> statements)
     {
         this.visibilityQualifier = visibilityQualifier;
         this.returnType = returnType;
