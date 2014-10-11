@@ -28,7 +28,8 @@ public class CodeGeneratorTest {
     @Before
     public void setup() {
         initMocks(this);
-        codeGenerator = new CodeGenerator(packageFormatterMock);
+        codeGenerator = new CodeGenerator();
+        codeGenerator.packageFormatter = packageFormatterMock;
     }
 
 

@@ -4,7 +4,9 @@ package CodeGenerator;
 import CodeGenerator.CodeFormatters.Interfaces.PackageFormatter;
 import CodeGenerator.CodeGraph.PackageMember;
 import com.google.common.annotations.VisibleForTesting;
+import com.google.inject.Guice;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,13 +15,24 @@ import java.util.List;
 
 public class CodeGenerator {
 
-    @Inject
-    private PackageFormatter packageFormatter;
+    PackageFormatter packageFormatter;
+
+    public CodeGenerator() {
+        Injector injector = Guice.createInjector(new AppInjector());
+        packageFormatter = injector.getInstance(PackageFormatter.class);
+    }
 
     public void generate(PackageMember packageMember, String fileName) throws IOException {
         List<String> formattedCode = packageFormatter.format(packageMember);
         writeFormattedCodeToFile(formattedCode, fileName);
     }
+
+    public void generateToConsole(PackageMember packageMember) throws IOException {
+        List<String> formattedCode = packageFormatter.format(packageMember);
+        formattedCode.forEach(System.out::println);
+    }
+
+
 
     private void writeFormattedCodeToFile(List<String> formattedCode, String fileName) throws IOException {
         PrintWriter fileWriter = new PrintWriter(new FileWriter(fileName));
@@ -27,10 +40,5 @@ public class CodeGenerator {
         formattedCode.forEach(fileWriter::println);
 
         fileWriter.close();
-    }
-
-    @VisibleForTesting
-    public CodeGenerator(PackageFormatter packageFormatter) {
-        this.packageFormatter = packageFormatter;
     }
 }
