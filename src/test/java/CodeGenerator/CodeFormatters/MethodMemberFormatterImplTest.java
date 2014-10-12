@@ -29,7 +29,7 @@ public class MethodMemberFormatterImplTest
     @Test
     public void shouldFormatMethod()
     {
-        MethodMember methodMember = new MethodMember(VisibilityQualifier.PRIVATE, "void", "testMethod", new ArrayList<>());
+        MethodMember methodMember = new MethodMember(VisibilityQualifier.PRIVATE, "void", "testMethod", new ArrayList<String>());
         methodMember.addStatement("System.out.println(\"Hello World\")");
 
 

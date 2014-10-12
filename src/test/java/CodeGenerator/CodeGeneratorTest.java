@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class CodeGeneratorTest {
 
         codeGenerator.generateToFile(packageMemberMock, fileName);
 
-        List<String> fileContents = Files.readAllLines(Paths.get(fileName));
+        List<String> fileContents = Files.readAllLines(Paths.get(fileName), Charset.defaultCharset());
         assertThat(fileContents.size(), is(1));
         assertThat(fileContents.get(0), is("foobar"));
 

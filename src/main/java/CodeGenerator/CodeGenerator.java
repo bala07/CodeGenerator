@@ -29,13 +29,17 @@ public class CodeGenerator {
 
     public void generateToConsole(PackageMember packageMember) throws IOException {
         List<String> formattedCode = packageFormatter.format(packageMember);
-        formattedCode.forEach(System.out::println);
+        for(String line : formattedCode) {
+            System.out.println(line);
+        }
     }
 
     private void writeFormattedCodeToFile(List<String> formattedCode, String fileName) throws IOException {
         PrintWriter fileWriter = new PrintWriter(new FileWriter(fileName));
 
-        formattedCode.forEach(fileWriter::println);
+        for(String line : formattedCode) {
+            fileWriter.println(line);
+        }
 
         fileWriter.close();
     }
