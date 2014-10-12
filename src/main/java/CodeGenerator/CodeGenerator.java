@@ -22,7 +22,7 @@ public class CodeGenerator {
         packageFormatter = injector.getInstance(PackageFormatter.class);
     }
 
-    public void generate(PackageMember packageMember, String fileName) throws IOException {
+    public void generateToFile(PackageMember packageMember, String fileName) throws IOException {
         List<String> formattedCode = packageFormatter.format(packageMember);
         writeFormattedCodeToFile(formattedCode, fileName);
     }
@@ -31,8 +31,6 @@ public class CodeGenerator {
         List<String> formattedCode = packageFormatter.format(packageMember);
         formattedCode.forEach(System.out::println);
     }
-
-
 
     private void writeFormattedCodeToFile(List<String> formattedCode, String fileName) throws IOException {
         PrintWriter fileWriter = new PrintWriter(new FileWriter(fileName));

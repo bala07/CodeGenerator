@@ -2,7 +2,6 @@ package CodeGenerator;
 
 import CodeGenerator.CodeFormatters.Interfaces.PackageFormatter;
 import CodeGenerator.CodeGraph.PackageMember;
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -38,7 +37,7 @@ public class CodeGeneratorTest {
     public void shouldFormatTheCodeFromPackageObject() throws IOException {
         String fileName = "foobar";
 
-        codeGenerator.generate(packageMemberMock, fileName);
+        codeGenerator.generateToFile(packageMemberMock, fileName);
 
         verify(packageFormatterMock, times(1)).format(packageMemberMock);
     }
@@ -51,7 +50,7 @@ public class CodeGeneratorTest {
 
         when(packageFormatterMock.format(packageMemberMock)).thenReturn(formattedCode);
 
-        codeGenerator.generate(packageMemberMock, fileName);
+        codeGenerator.generateToFile(packageMemberMock, fileName);
 
         List<String> fileContents = Files.readAllLines(Paths.get(fileName));
         assertThat(fileContents.size(), is(1));
