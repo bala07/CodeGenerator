@@ -37,7 +37,7 @@ public class MethodMemberFormatterImplTest
 
         assertThat(formattedMethod.size(), is(3));
         assertThat(formattedMethod.get(0), is("private void testMethod() {"));
-        assertThat(formattedMethod.get(1), is("\tSystem.out.println(\"Hello World\")"));
+        assertThat(formattedMethod.get(1), is("\tSystem.out.println(\"Hello World\");"));
         assertThat(formattedMethod.get(2), is("}"));
     }
 }

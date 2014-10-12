@@ -38,6 +38,8 @@ public class ClassFormatterImpl implements ClassFormatter
             result.add(TAB + fieldFormatter.format(fieldMember).get(0));
         }
 
+        result.add("");
+
         for(MethodMember methodMember : classMemberCodeObject.getMethodMembers())
         {
             List<String> formattedMethod = methodFormatter.format(methodMember);
@@ -45,6 +47,7 @@ public class ClassFormatterImpl implements ClassFormatter
             {
                 result.add(TAB + line);
             }
+            result.add("");
         }
 
         result.add(CLOSE_BRACE);

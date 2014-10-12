@@ -29,9 +29,14 @@ public class PackageFormatterImpl implements PackageFormatter {
 
         formattedPackage.add("package " + packageObject.getName() + LINE_TERMINATOR);
 
+        formattedPackage.add("");
+
         for(ImportMember importMember : packageObject.getImportMembers()) {
             formattedPackage.addAll(importFormatter.format(importMember));
         }
+
+        //TODO: To test new lines
+        formattedPackage.add("");
 
         for(ClassMember classMember : packageObject.getClassMembers()) {
             formattedPackage.addAll(classFormatter.format(classMember));

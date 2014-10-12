@@ -18,7 +18,7 @@ public class MethodFormatterImpl implements MethodFormatter
         result.add(methodMember.getVisibilityQualifier() + SPACE + methodMember.getReturnType() + SPACE + methodMember.getName() + OPEN_PARANTHESES + CLOSE_PARANTHESES + SPACE + OPEN_BRACE);
         for(String statement : methodMember.getStatements())
         {
-            result.add(new String(TAB + statement));
+            result.add(new String(TAB + statement + LINE_TERMINATOR));
         }
         result.add(new String(CLOSE_BRACE));
 

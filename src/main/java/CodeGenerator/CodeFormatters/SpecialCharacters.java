@@ -9,4 +9,5 @@ public class SpecialCharacters
     public static final String OPEN_PARANTHESES = "(";
     public static final String CLOSE_PARANTHESES = ")";
     public static final String TAB = "\t";
+    public static final String NEW_LINE = "\n";
 }

@@ -38,7 +38,7 @@ public class PackageMemberFormatterImplTest {
         PackageMember packageMemberObject = new PackageMember(name, importMembers, classMembers);
         List<String> formattedPackage = packageFormatter.format(packageMemberObject);
 
-        assertThat(formattedPackage.get(0), is("package packageName;"));
+        assertThat(formattedPackage.get(0), is("package packageName;\n"));
         verify(importFormatterMock, times(importMembers.size())).format(any(ImportMember.class));
         verify(classFormatterMock, times(classMembers.size())).format(any(ClassMember.class));
     }
